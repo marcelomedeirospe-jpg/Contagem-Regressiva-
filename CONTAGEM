@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contagem Regressiva</title>
+
+<style>
+body{
+    margin:0;
+    background:#0d1117;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+.caixa{
+    padding:30px;
+}
+
+h1{
+    font-size:2rem;
+}
+
+#timer{
+    font-size:4rem;
+    color:#00ff88;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+h2{
+    font-size:1.5rem;
+    color:#ddd;
+}
+</style>
+
+</head>
+<body>
+
+<div class="caixa">
+    <h1>⏳ Falta</h1>
+    <div id="timer">00:00:00</div>
+    <h2>para João kitar do server brasileiro.</h2>
+</div>
+
+<script>
+function atualizarContador() {
+    const agora = new Date();
+
+    const alvo = new Date();
+    alvo.setHours(15, 0, 0, 0);
+
+    if (agora >= alvo) {
+        document.getElementById("timer").innerHTML = "00:00:00";
+        document.querySelector("h2").innerHTML = "🎉 João já kitou do server brasileiro!";
+        return;
+    }
+
+    let diferenca = alvo - agora;
+
+    const horas = Math.floor(diferenca / 1000 / 60 / 60);
+    const minutos = Math.floor((diferenca / 1000 / 60) % 60);
+    const segundos = Math.floor((diferenca / 1000) % 60);
+
+    document.getElementById("timer").innerHTML =
+        String(horas).padStart(2,"0")+":"+
+        String(minutos).padStart(2,"0")+":"+
+        String(segundos).padStart(2,"0");
+}
+
+atualizarContador();
+setInterval(atualizarContador,1000);
+</script>
+
+</body>
+</html>
